@@ -1,7 +1,8 @@
 from typing import Any
-
 import pygame as pg
+
 from projectile import Projectile
+from game_internal import TYPE
 
 
 # {name: [size, speed]}
@@ -24,7 +25,7 @@ class Tank(pg.sprite.Sprite):
         self.size = SIZE_CLASS[self.size_class][0]
         self.speed = SIZE_CLASS[self.size_class][1]
 
-        self.image = pg.image.load("art/tanks/bubble.png")
+        self.image = pg.image.load(TYPE[o_type]['image'])
         self.rect = self.image.get_rect()
 
         self.projectile: Projectile
