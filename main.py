@@ -1,5 +1,6 @@
 import pygame as pg
 from tank import Tank, Crosshair
+from projectile import Projectile
 
 
 
@@ -27,6 +28,11 @@ while game_is_on:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             game_is_on = False
+        if event.type == pg.MOUSEBUTTONDOWN:
+            button = event.dict['button']
+            if button == 1:
+                projectile = Projectile(pg.Vector2(player_tank.rect.center), pg.Vector2(1, 1))
+                all_sprites.add(projectile)
 
     keys_pressed = pg.key.get_pressed()
 
