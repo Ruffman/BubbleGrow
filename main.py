@@ -31,7 +31,9 @@ while game_is_on:
         if event.type == pg.MOUSEBUTTONDOWN:
             button = event.dict['button']
             if button == 1:
-                projectile = Projectile(pg.Vector2(player_tank.rect.center), pg.Vector2(1, 1))
+                spawn_point = pg.Vector2(player_tank.rect.center)
+                direction = pg.Vector2(pg.Vector2(crosshair.rect.center) - spawn_point).normalize()
+                projectile = Projectile(spawn_point, direction)
                 all_sprites.add(projectile)
 
     keys_pressed = pg.key.get_pressed()
