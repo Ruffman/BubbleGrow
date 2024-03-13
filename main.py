@@ -15,10 +15,10 @@ background = pg.Surface(screen.get_size()).convert()
 background.fill("blue")
 
 
-player_tank = Tank()
+player_tank = Tank('player')
 player_tank.rect.center = (640, 360)
 
-ai_tank = Tank()
+ai_tank = Tank('enemy')
 ai_tank.rect.center = (100, 100)
 
 crosshair = Crosshair()
@@ -37,9 +37,7 @@ while game_is_on:
                 projectile = player_tank.fire(pg.Vector2(crosshair.rect.center))
                 all_sprites.add(projectile)
             if button == 3:
-                spawn_point = pg.Vector2(ai_tank.rect.center)
-                direction = pg.Vector2(pg.Vector2(crosshair.rect.center) - spawn_point).normalize()
-                projectile = Projectile(spawn_point, direction)
+                projectile = ai_tank.fire(pg.Vector2(crosshair.rect.center))
                 all_sprites.add(projectile)
 
     keys_pressed = pg.key.get_pressed()

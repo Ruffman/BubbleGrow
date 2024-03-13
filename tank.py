@@ -15,10 +15,11 @@ SIZE_CLASS = {
 
 
 class Tank(pg.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, o_type: str):
         pg.sprite.Sprite.__init__(self)
         self.surface = pg.display.get_surface()
         self.color = "white"
+        self.object_type = o_type
         self.size_class = "tank"
         self.size = SIZE_CLASS[self.size_class][0]
         self.speed = SIZE_CLASS[self.size_class][1]
@@ -31,7 +32,6 @@ class Tank(pg.sprite.Sprite):
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         pass
-        # self.rect.center = pg.mouse.get_pos()
 
     def move(self, x_axis, y_axis, dt):
         self.rect.center += pg.Vector2(x_axis*self.speed*dt, y_axis*self.speed*dt)
@@ -39,7 +39,7 @@ class Tank(pg.sprite.Sprite):
     def fire(self, target: pg.Vector2) -> Projectile:
         spawn_point = pg.Vector2(self.rect.center)
         direction = pg.Vector2(target - spawn_point).normalize()
-        projectile = Projectile(spawn_point, direction)
+        projectile = Projectile(spawn_point, direction, self.object_type)
         return projectile
 
 
