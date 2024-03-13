@@ -1,6 +1,5 @@
 import pygame as pg
 from tank import Tank, Crosshair
-from projectile import Projectile
 
 
 
