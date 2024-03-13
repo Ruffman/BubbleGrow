@@ -18,9 +18,12 @@ background.fill("blue")
 player_tank = Tank()
 player_tank.rect.center = (640, 360)
 
+ai_tank = Tank()
+ai_tank.rect.center = (100, 100)
+
 crosshair = Crosshair()
 
-all_sprites = pg.sprite.Group([player_tank, crosshair])
+all_sprites = pg.sprite.Group([player_tank, ai_tank, crosshair])
 
 game_is_on = True
 while game_is_on:
@@ -32,6 +35,11 @@ while game_is_on:
             button = event.dict['button']
             if button == 1:
                 spawn_point = pg.Vector2(player_tank.rect.center)
+                direction = pg.Vector2(pg.Vector2(crosshair.rect.center) - spawn_point).normalize()
+                projectile = Projectile(spawn_point, direction)
+                all_sprites.add(projectile)
+            if button == 3:
+                spawn_point = pg.Vector2(ai_tank.rect.center)
                 direction = pg.Vector2(pg.Vector2(crosshair.rect.center) - spawn_point).normalize()
                 projectile = Projectile(spawn_point, direction)
                 all_sprites.add(projectile)
