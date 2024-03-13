@@ -30,3 +30,15 @@ class Tank(pg.sprite.Sprite):
 
     def move(self, x_axis, y_axis, dt):
         self.rect.center += pg.Vector2(x_axis*self.speed*dt, y_axis*self.speed*dt)
+
+
+class Crosshair(pg.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        self.image = pg.image.load("art/tanks/crosshair.png")
+
+        self.rect = self.image.get_rect()
+
+    def update(self) -> None:
+        self.rect.center = pg.mouse.get_pos()
