@@ -25,7 +25,7 @@ class Tank(pg.sprite.Sprite):
         self.size = SIZE_CLASS[self.size_class][0]
         self.speed = SIZE_CLASS[self.size_class][1]
 
-        self.image = pg.image.load(TYPE[o_type]['image'])
+        self.image = pg.image.load(TYPE[o_type]['image']).convert()
         self.rect = self.image.get_rect()
 
         self.projectile: Projectile

@@ -8,6 +8,7 @@ TYPE = {
         'projectile': {
             'image': "art/tanks/bubble.png",
             'damage': 100,
+            'size': 15,
         },
     },
     'enemy': {
@@ -16,6 +17,7 @@ TYPE = {
         'projectile': {
             'image': "art/projectiles/enemy_weapon_1.png",
             'damage': 100,
+            'size': 15,
         },
     }
 }

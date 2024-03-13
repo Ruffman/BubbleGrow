@@ -9,7 +9,9 @@ class Projectile(pg.sprite.Sprite):
     def __init__(self, position: pg.Vector2, direction: pg.Vector2, p_type: str):
         super().__init__()
 
-        self.image = pg.image.load(TYPE[p_type]['projectile']['image']).convert()
+        self.proj_data = TYPE[p_type]['projectile']
+        self.image = pg.image.load(self.proj_data['image']).convert()
+        self.image = pg.transform.scale(self.image, (self.proj_data['size'], self.proj_data['size']))
 
         self.rect = self.image.get_rect()
         self.rect.center = position
