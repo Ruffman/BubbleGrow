@@ -1,6 +1,7 @@
 from typing import Any
 
 import pygame as pg
+from projectile import Projectile
 
 
 # {name: [size, speed]}
@@ -25,6 +26,8 @@ class Tank(pg.sprite.Sprite):
         self.image = pg.image.load("art/tanks/bubble.png")
         self.rect = self.image.get_rect()
 
+        self.projectile: Projectile
+
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         pass
@@ -32,6 +35,12 @@ class Tank(pg.sprite.Sprite):
 
     def move(self, x_axis, y_axis, dt):
         self.rect.center += pg.Vector2(x_axis*self.speed*dt, y_axis*self.speed*dt)
+
+    def fire(self, target: pg.Vector2) -> Projectile:
+        spawn_point = pg.Vector2(self.rect.center)
+        direction = pg.Vector2(target - spawn_point).normalize()
+        projectile = Projectile(spawn_point, direction)
+        return projectile
 
 
 class Crosshair(pg.sprite.Sprite):
