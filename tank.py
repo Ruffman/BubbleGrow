@@ -28,5 +28,5 @@ class Tank(pg.sprite.Sprite):
         pass
         # self.rect.center = pg.mouse.get_pos()
 
-    def move(self, x_axis, y_axis):
-        self.rect.center += pg.Vector2(x_axis*self.speed, y_axis*self.speed)
+    def move(self, x_axis, y_axis, dt):
+        self.rect.center += pg.Vector2(x_axis*self.speed*dt, y_axis*self.speed*dt)
