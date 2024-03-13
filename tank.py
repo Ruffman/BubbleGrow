@@ -1,3 +1,5 @@
+from typing import Any
+
 import pygame as pg
 
 
@@ -24,7 +26,7 @@ class Tank(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 
-    def update(self) -> None:
+    def update(self, *args: Any, **kwargs: Any) -> None:
         pass
         # self.rect.center = pg.mouse.get_pos()
 
@@ -40,5 +42,5 @@ class Crosshair(pg.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
-    def update(self) -> None:
+    def update(self, *args: Any, **kwargs: Any) -> None:
         self.rect.center = pg.mouse.get_pos()

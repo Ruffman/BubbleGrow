@@ -41,7 +41,7 @@ while game_is_on:
         player_tank.move(1, 0, dt)
 
     # Game logic updates
-    all_sprites.update()
+    all_sprites.update(dt=dt)
 
 
     # render game here
