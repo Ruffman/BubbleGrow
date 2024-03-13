@@ -1,13 +1,13 @@
 import pygame as pg
 
 
-
+# {name: [size, speed]}
 SIZE_CLASS = {
-    "scout": [50, 100],
-    "fighter": [60, 80],
-    "freighter": [70, 70],
-    "tank": [80, 60],
-    "capital": [120, 50],
+    "scout": [50, 600],
+    "fighter": [60, 500],
+    "freighter": [70, 400],
+    "tank": [80, 300],
+    "capital": [120, 200],
 }
 
 

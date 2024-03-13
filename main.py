@@ -4,7 +4,7 @@ from tank import Tank
 
 
 pg.init()
-screen = pg.display.set_mode((1280, 720), pg.SCALED)
+screen = pg.display.set_mode((1000, 800), pg.SCALED)
 pg.display.set_caption("BubbleTanker")
 pg.mouse.set_visible(False)
 clock = pg.time.Clock()
