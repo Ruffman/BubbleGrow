@@ -19,20 +19,33 @@ player_tank.rect.center = (640, 360)
 crosshair = Crosshair()
 player_projectiles = pg.sprite.Group()
 
-all_sprites = pg.sprite.Group([player_tank, crosshair])
+player_sprites = pg.sprite.Group([player_tank, crosshair])
 
 ai_tank = AiTank('enemy', 'scout')
 ai_tank.rect.center = (100, 100)
-all_sprites.add(ai_tank)
 ai_tank_two = AiTank('enemy', 'freighter')
 ai_tank_two.rect.center = (700, 700)
-all_sprites.add(ai_tank_two)
 
 enemy_sprites = pg.sprite.Group([ai_tank, ai_tank_two])
 enemy_projectiles = pg.sprite.Group()
 
-
 game_is_on = True
+
+
+def draw_all_sprites(display: pg.Surface):
+    player_sprites.draw(display)
+    enemy_sprites.draw(display)
+    enemy_projectiles.draw(display)
+    player_projectiles.draw(display)
+
+
+def update_all_sprites(delta_time):
+    player_sprites.update(dt=delta_time)
+    enemy_sprites.update(dt=delta_time, target=player_tank)
+    enemy_projectiles.update(dt=delta_time)
+    player_projectiles.update(dt=delta_time)
+
+
 while game_is_on:
     # process player inputs
     for event in pg.event.get():
@@ -43,12 +56,10 @@ while game_is_on:
             if button == 1:
                 projectile = player_tank.fire(pg.Vector2(crosshair.rect.center))
                 player_projectiles.add(projectile)
-                all_sprites.add(projectile)
             if button == 3:
                 new_enemy = AiTank('enemy', 'tank')
                 new_enemy.rect.center = pg.mouse.get_pos()
                 enemy_sprites.add(new_enemy)
-                all_sprites.add(new_enemy)
 
     keys_pressed = pg.key.get_pressed()
 
@@ -75,7 +86,6 @@ while game_is_on:
         new_proj = enemy.fire(player_tank.get_position())
         if new_proj:
             enemy_projectiles.add(new_proj)
-            all_sprites.add(new_proj)
 
     # player logic updates
     for enemy in enemy_sprites:
@@ -87,12 +97,11 @@ while game_is_on:
             proj.kill()
             print("enemy projectile hit player")
 
-
-    all_sprites.update(dt=dt)
+    update_all_sprites(dt)
 
     # render game here
     screen.blit(background, (0, 0))
-    all_sprites.draw(screen)
+    draw_all_sprites(screen)
     pg.display.flip()
 
     dt = clock.tick(60) / 1000
