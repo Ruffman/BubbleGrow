@@ -35,8 +35,8 @@ class Tank(pg.sprite.Sprite):
     def update(self, *args: Any, **kwargs: Any) -> None:
         pass
 
-    def move(self, x_axis, y_axis, dt):
-        self.rect.center += pg.Vector2(x_axis*self.speed*dt, y_axis*self.speed*dt)
+    def move(self, direction: pg.Vector2, dt):
+        self.rect.center += direction * dt * self.speed
 
     def fire(self, target: pg.Vector2) -> Projectile:
         spawn_point = pg.Vector2(self.rect.center)

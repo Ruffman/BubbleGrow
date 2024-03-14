@@ -63,15 +63,19 @@ while game_is_on:
 
     keys_pressed = pg.key.get_pressed()
 
-    # player movement
+    # player movement#
+    player_direction = pg.Vector2(0, 0)
     if keys_pressed[pg.K_w]:
-        player_tank.move(0, -1, dt)
+        player_direction += pg.Vector2(0, -1)
     if keys_pressed[pg.K_a]:
-        player_tank.move(-1, 0, dt)
+        player_direction += pg.Vector2(-1, 0)
     if keys_pressed[pg.K_s]:
-        player_tank.move(0, 1, dt)
+        player_direction += pg.Vector2(0, 1)
     if keys_pressed[pg.K_d]:
-        player_tank.move(1, 0, dt)
+        player_direction += pg.Vector2(1, 0)
+    if player_direction.length() > 0:
+        player_direction = player_direction.normalize()
+    player_tank.move(player_direction, dt)
 
     # Game logic updates
 
