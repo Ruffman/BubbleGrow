@@ -63,7 +63,15 @@ while game_is_on:
         player_tank.move(1, 0, dt)
 
     # Game logic updates
+
+    # enemy logic updates
     for enemy in enemy_sprites:
+        # check collision with player projectiles
+        for p in player_projectiles:
+            if enemy.rect.colliderect(p.rect):
+                enemy.kill()
+                p.kill()
+        # fire projectiles if able
         new_proj = enemy.fire(player_tank.get_position())
         if new_proj:
             enemy_projectiles.add(new_proj)
