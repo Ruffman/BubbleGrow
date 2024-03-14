@@ -16,12 +16,12 @@ SIZE_CLASS = {
 
 
 class Tank(pg.sprite.Sprite):
-    def __init__(self, o_type: str):
+    def __init__(self, o_type: str, size_class: str):
         pg.sprite.Sprite.__init__(self)
         self.surface = pg.display.get_surface()
         self.color = "white"
         self.object_type = o_type
-        self.size_class = "tank"
+        self.size_class = size_class
         self.size = SIZE_CLASS[self.size_class][0]
         self.speed = SIZE_CLASS[self.size_class][1]
 
@@ -61,8 +61,8 @@ class Crosshair(pg.sprite.Sprite):
 
 
 class AiTank(Tank):
-    def __init__(self):
-        super().__init__(o_type='enemy')
+    def __init__(self, o_type: str, size_class: str):
+        super().__init__(o_type, size_class)
 
         self.fire_rate = 1.0
         self.fire_cd = self.fire_rate

@@ -14,17 +14,17 @@ background = pg.Surface(screen.get_size()).convert()
 background.fill("blue")
 
 
-player_tank = Tank('player')
+player_tank = Tank('player', 'tank')
 player_tank.rect.center = (640, 360)
 crosshair = Crosshair()
 player_projectiles = pg.sprite.Group()
 
 all_sprites = pg.sprite.Group([player_tank, crosshair])
 
-ai_tank = AiTank()
+ai_tank = AiTank('enemy', 'scout')
 ai_tank.rect.center = (100, 100)
 all_sprites.add(ai_tank)
-ai_tank_two = AiTank()
+ai_tank_two = AiTank('enemy', 'freighter')
 ai_tank_two.rect.center = (700, 700)
 all_sprites.add(ai_tank_two)
 
@@ -45,7 +45,7 @@ while game_is_on:
                 player_projectiles.add(projectile)
                 all_sprites.add(projectile)
             if button == 3:
-                new_enemy = AiTank()
+                new_enemy = AiTank('enemy', 'tank')
                 new_enemy.rect.center = pg.mouse.get_pos()
                 enemy_sprites.add(new_enemy)
                 all_sprites.add(new_enemy)
