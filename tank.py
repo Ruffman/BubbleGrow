@@ -69,13 +69,14 @@ class AiTank(Tank):
 
         self.look_direction = pg.Vector2()
         self.speed = 100
+        self.circle_distance = 300
+        self.circle_buffer = 30
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         dt = kwargs['dt']
         target: Tank = kwargs['target']
         self.fire_cd -= dt
-        self.look_at_target(pg.Vector2(target.rect.center))
-        self.move_in_direction(dt)
+        self.circle_target(dt, pg.Vector2(target.rect.center))
 
     def fire(self, target: pg.Vector2) -> Projectile:
         if self.fire_cd <= 0:
@@ -88,5 +89,17 @@ class AiTank(Tank):
             target_direction = target_direction.normalize()
         self.look_direction = target_direction
 
-    def move_in_direction(self, dt) -> None:
-        self.rect.center = self.rect.center + self.direction * self.speed * dt
+    def move_in_direction(self, dt: float, direction: pg.Vector2) -> None:
+        if direction.length() > 1:
+            direction = direction.normalize()
+        self.rect.center = self.rect.center + direction * self.speed * dt
+
+    def circle_target(self, dt: float, target: pg.Vector2) -> None:
+        distance_to_target = pg.Vector2(target - pg.Vector2(self.rect.center))
+        self.look_at(target)
+        if distance_to_target.length() > self.circle_distance + self.circle_buffer:
+            self.move_in_direction(dt, self.look_direction)
+        elif distance_to_target.length() < self.circle_distance:
+            self.move_in_direction(dt, self.look_direction * -1)
+        else:
+            self.move_in_direction(dt, self.look_direction.rotate(90))
