@@ -91,11 +91,11 @@ while game_is_on:
     for enemy in enemy_sprites:
         if pg.sprite.collide_circle(player_tank, enemy):
             enemy.kill()
-            print("player hit an enemy actor")
+            print("player hit an enemy actor")  # TODO player loses health
     for proj in enemy_projectiles:
         if pg.sprite.collide_circle(player_tank, proj):
             proj.kill()
-            print("enemy projectile hit player")
+            print("enemy projectile hit player")  # TODO player loses health
 
     update_all_sprites(dt)
 
