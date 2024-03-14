@@ -77,7 +77,15 @@ while game_is_on:
             enemy_projectiles.add(new_proj)
             all_sprites.add(new_proj)
 
-
+    # player logic updates
+    for e in enemy_sprites:
+        if player_tank.rect.colliderect(e.rect):
+            e.kill()
+            print("player hit an enemy actor")
+    for p in enemy_projectiles:
+        if player_tank.rect.colliderect(p.rect):
+            p.kill()
+            print("enemy projectile hit player")
 
 
     all_sprites.update(dt=dt)
