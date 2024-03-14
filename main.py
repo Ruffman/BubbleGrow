@@ -17,6 +17,7 @@ background.fill("blue")
 player_tank = Tank('player')
 player_tank.rect.center = (640, 360)
 crosshair = Crosshair()
+player_projectiles = pg.sprite.Group()
 
 all_sprites = pg.sprite.Group([player_tank, crosshair])
 
@@ -26,7 +27,9 @@ all_sprites.add(ai_tank)
 ai_tank_two = AiTank()
 ai_tank_two.rect.center = (700, 700)
 all_sprites.add(ai_tank_two)
+
 enemy_sprites = pg.sprite.Group([ai_tank, ai_tank_two])
+enemy_projectiles = pg.sprite.Group()
 
 
 game_is_on = True
@@ -39,6 +42,7 @@ while game_is_on:
             button = event.dict['button']
             if button == 1:
                 projectile = player_tank.fire(pg.Vector2(crosshair.rect.center))
+                player_projectiles.add(projectile)
                 all_sprites.add(projectile)
             if button == 3:
                 new_enemy = AiTank()
@@ -62,12 +66,13 @@ while game_is_on:
     for enemy in enemy_sprites:
         new_proj = enemy.fire(player_tank.get_position())
         if new_proj:
+            enemy_projectiles.add(new_proj)
             all_sprites.add(new_proj)
 
 
 
-    all_sprites.update(dt=dt)
 
+    all_sprites.update(dt=dt)
 
     # render game here
     screen.blit(background, (0, 0))
