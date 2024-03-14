@@ -72,8 +72,9 @@ class AiTank(Tank):
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         dt = kwargs['dt']
+        target: Tank = kwargs['target']
         self.fire_cd -= dt
-        self.look_at_target(pg.Vector2(0, 0))
+        self.look_at_target(pg.Vector2(target.rect.center))
         self.move_in_direction(dt)
 
     def fire(self, target: pg.Vector2) -> Projectile:
