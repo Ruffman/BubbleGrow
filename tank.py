@@ -27,6 +27,7 @@ class Tank(pg.sprite.Sprite):
 
         self.image = pg.transform.scale(pg.image.load(TYPE[o_type]['image']).convert(), (self.size, self.size))
         self.rect = self.image.get_rect()
+        self.radius = self.size // 2
 
         self.projectile: Projectile
 
