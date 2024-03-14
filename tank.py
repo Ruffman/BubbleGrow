@@ -67,7 +67,7 @@ class AiTank(Tank):
         self.fire_rate = 1.0
         self.fire_cd = self.fire_rate
 
-        self.direction = pg.Vector2(1, 1)
+        self.look_direction = pg.Vector2()
         self.speed = 100
 
     def update(self, *args: Any, **kwargs: Any) -> None:
@@ -82,10 +82,11 @@ class AiTank(Tank):
             self.fire_cd = self.fire_rate
             return super().fire(target)
 
-    def look_at_target(self, target: pg.Vector2):
-        self.direction = target - pg.Vector2(self.rect.center)
-        if self.direction.length() > 0:
-            self.direction = self.direction.normalize()
+    def look_at(self, target: pg.Vector2) -> None:
+        target_direction = target - pg.Vector2(self.rect.center)
+        if target_direction.length() > 0:
+            target_direction = target_direction.normalize()
+        self.look_direction = target_direction
 
     def move_in_direction(self, dt) -> None:
         self.rect.center = self.rect.center + self.direction * self.speed * dt
