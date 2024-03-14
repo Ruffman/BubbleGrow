@@ -101,10 +101,12 @@ while game_is_on:
             proj.kill()
             print("enemy projectile hit player")  # TODO player loses health
 
+    # this should come after update, but for debug purposes it's before for now
+    screen.blit(background, (0, 0))
+
     update_all_sprites(dt)
 
     # render game here
-    screen.blit(background, (0, 0))
     draw_all_sprites(screen)
     pg.display.flip()
 

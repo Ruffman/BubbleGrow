@@ -70,13 +70,15 @@ class AiTank(Tank):
         self.look_direction = pg.Vector2()
         self.speed = 100
         self.circle_distance = 300
-        self.circle_buffer = 30
+        self.circle_buffer = 5
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         dt = kwargs['dt']
         target: Tank = kwargs['target']
         self.fire_cd -= dt
         self.circle_target(dt, pg.Vector2(target.rect.center))
+
+        pg.draw.line(pg.display.get_surface(), "red", self.rect.center, target.rect.center)
 
     def fire(self, target: pg.Vector2) -> Projectile:
         if self.fire_cd <= 0:
