@@ -108,6 +108,6 @@ while game_is_on:
     draw_all_sprites(screen)
     pg.display.flip()
 
-    dt = clock.tick(60) / 1000
+    dt: float = clock.tick(60) / 1000
 
 pg.quit()
