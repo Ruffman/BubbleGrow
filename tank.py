@@ -54,3 +54,19 @@ class Crosshair(pg.sprite.Sprite):
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         self.rect.center = pg.mouse.get_pos()
+
+
+class AiTank(Tank):
+    def __init__(self):
+        super().__init__(o_type='enemy')
+
+        self.fire_rate = 1.0
+        self.fire_cd = self.fire_rate
+
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        self.fire_cd -= kwargs['dt']
+
+    def fire(self, target: pg.Vector2) -> Projectile:
+        if self.fire_cd <= 0:
+            self.fire_cd = self.fire_rate
+            return super().fire(target)

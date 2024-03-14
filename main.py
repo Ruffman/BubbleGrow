@@ -1,5 +1,5 @@
 import pygame as pg
-from tank import Tank, Crosshair
+from tank import Tank, AiTank, Crosshair
 
 
 
@@ -16,13 +16,18 @@ background.fill("blue")
 
 player_tank = Tank('player')
 player_tank.rect.center = (640, 360)
-
-ai_tank = Tank('enemy')
-ai_tank.rect.center = (100, 100)
-
 crosshair = Crosshair()
 
-all_sprites = pg.sprite.Group([player_tank, ai_tank, crosshair])
+all_sprites = pg.sprite.Group([player_tank, crosshair])
+
+ai_tank = AiTank()
+ai_tank.rect.center = (100, 100)
+all_sprites.add(ai_tank)
+ai_tank_two = AiTank()
+ai_tank_two.rect.center = (700, 700)
+all_sprites.add(ai_tank_two)
+enemy_sprites = pg.sprite.Group([ai_tank, ai_tank_two])
+
 
 game_is_on = True
 while game_is_on:
@@ -36,8 +41,10 @@ while game_is_on:
                 projectile = player_tank.fire(pg.Vector2(crosshair.rect.center))
                 all_sprites.add(projectile)
             if button == 3:
-                projectile = ai_tank.fire(pg.Vector2(crosshair.rect.center))
-                all_sprites.add(projectile)
+                new_enemy = AiTank()
+                new_enemy.rect.center = pg.mouse.get_pos()
+                enemy_sprites.add(new_enemy)
+                all_sprites.add(new_enemy)
 
     keys_pressed = pg.key.get_pressed()
 
