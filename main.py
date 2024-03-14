@@ -59,6 +59,13 @@ while game_is_on:
         player_tank.move(1, 0, dt)
 
     # Game logic updates
+    for enemy in enemy_sprites:
+        new_proj = enemy.fire(player_tank.get_position())
+        if new_proj:
+            all_sprites.add(new_proj)
+
+
+
     all_sprites.update(dt=dt)
 
 

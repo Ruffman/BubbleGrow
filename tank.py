@@ -43,6 +43,9 @@ class Tank(pg.sprite.Sprite):
         projectile = Projectile(spawn_point, direction, self.object_type)
         return projectile
 
+    def get_position(self) -> pg.Vector2:
+        return pg.Vector2(self.rect.center)
+
 
 class Crosshair(pg.sprite.Sprite):
     def __init__(self):
