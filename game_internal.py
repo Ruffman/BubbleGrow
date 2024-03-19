@@ -49,20 +49,6 @@ SHIP_TYPE_STATS = {
 }
 
 
-class WeaponSystem(Enum):
-    TURRET = 1
-    BAY = 2
-
-
-class Munitions(Enum):
-    PROJECTILE = 1
-    BEAM = 2
-    MINE = 3
-    MISSILE = 4
-    AGENT = 5
-    DRONE = 6
-
-
 GAME_OBJECTS = {
     'player_1': {
         'id': 1,
@@ -85,16 +71,13 @@ GAME_OBJECTS = {
         'ship': {
             'image': "art/tanks/bubble.png",
             'type': ShipType.SCOUT,
-            'weapons': [
-                {
-                    'type': WeaponSystem.TURRET,
-                    'turret_img': '',
-                    'munition': Munitions.PROJECTILE
-                    'munition_img': "art/projectiles/enemy_weapon_1.png",
+            'weapons': {
+                'projectile': {
+                    'image': "art/projectiles/enemy_weapon_1.png",
                     'damage': 100,
                     'size': 10,
                 },
-            ]
+            }
         }
     },
 }
