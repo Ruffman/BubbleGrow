@@ -1,11 +1,18 @@
 from typing import Any
+from abc import ABC, abstractmethod
 
 import pygame as pg
 
 from game_internal import TYPE
 
 
-class Projectile(pg.sprite.Sprite):
+class Munition(ABC, pg.sprite.Sprite):
+    @abstractmethod
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        pass
+
+
+class Projectile(Munition):
     def __init__(self, position: pg.Vector2, direction: pg.Vector2, p_type: str):
         super().__init__()
 
@@ -21,3 +28,44 @@ class Projectile(pg.sprite.Sprite):
 
     def update(self, *args: Any, **kwargs: Any) -> None:
         self.rect.center = self.rect.center + self.direction * self.speed * kwargs["dt"]
+
+
+class Beam(Munition):
+    def __init__(self):
+        super().__init__()
+
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        pass
+
+
+class Mine(Munition):
+    def __init__(self):
+        super().__init__()
+
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        pass
+
+
+class Missile(Munition):
+    def __init__(self):
+        super().__init__()
+
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        pass
+
+
+class Agent(Munition):
+    def __init__(self):
+        super().__init__()
+
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        pass
+
+
+class Drone(Munition):
+    def __init__(self):
+        super().__init__()
+
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        pass
+
