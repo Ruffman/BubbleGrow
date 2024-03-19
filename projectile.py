@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 import pygame as pg
 
-from game_internal import TYPE
+from game_internal import TYPE, Faction
 
 
 class Munition(ABC, pg.sprite.Sprite):
@@ -13,10 +13,10 @@ class Munition(ABC, pg.sprite.Sprite):
 
 
 class Projectile(Munition):
-    def __init__(self, position: pg.Vector2, direction: pg.Vector2, p_type: str):
+    def __init__(self, position: pg.Vector2, direction: pg.Vector2, faction: Faction):
         super().__init__()
 
-        self.proj_data = TYPE[p_type]['projectile']
+        self.proj_data = TYPE[faction]['projectile']
         self.image = pg.image.load(self.proj_data['image']).convert()
         self.image = pg.transform.scale(self.image, (self.proj_data['size'], self.proj_data['size']))
 

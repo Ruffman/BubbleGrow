@@ -2,30 +2,21 @@ from typing import Any
 import pygame as pg
 
 from projectile import Projectile
-from game_internal import TYPE
+from game_internal import TYPE, ShipType, SHIP_TYPE_STATS, Faction
 
-
-# {name: [size, speed]}
-SIZE_CLASS = {
-    "scout": [50, 600],
-    "fighter": [60, 500],
-    "freighter": [70, 400],
-    "tank": [80, 300],
-    "capital": [120, 200],
-}
 
 
 class Tank(pg.sprite.Sprite):
-    def __init__(self, o_type: str, size_class: str):
+    def __init__(self, faction: Faction, ship_type: ShipType):
         pg.sprite.Sprite.__init__(self)
         self.surface = pg.display.get_surface()
         self.color = "white"
-        self.object_type = o_type
-        self.size_class = size_class
-        self.size = SIZE_CLASS[self.size_class][0]
-        self.speed = SIZE_CLASS[self.size_class][1]
+        self.faction = faction
+        self.ship_type = ship_type
+        self.size = SHIP_TYPE_STATS[self.ship_type][0]
+        self.speed = SHIP_TYPE_STATS[self.ship_type][1]
 
-        self.image = pg.transform.scale(pg.image.load(TYPE[o_type]['image']).convert(), (self.size, self.size))
+        self.image = pg.transform.scale(pg.image.load(TYPE[faction]['image']).convert(), (self.size, self.size))
         self.rect = self.image.get_rect()
         self.radius = self.size // 2
 
@@ -41,7 +32,7 @@ class Tank(pg.sprite.Sprite):
     def fire(self, target: pg.Vector2) -> Projectile:
         spawn_point = pg.Vector2(self.rect.center)
         direction = pg.Vector2(target - spawn_point).normalize()
-        projectile = Projectile(spawn_point, direction, self.object_type)
+        projectile = Projectile(spawn_point, direction, self.faction)
         return projectile
 
     def get_position(self) -> pg.Vector2:
@@ -61,8 +52,8 @@ class Crosshair(pg.sprite.Sprite):
 
 
 class AiTank(Tank):
-    def __init__(self, o_type: str, size_class: str):
-        super().__init__(o_type, size_class)
+    def __init__(self, faction: Faction, ship_type: ShipType):
+        super().__init__(faction, ship_type)
 
         self.fire_rate = 1.0
         self.fire_cd = self.fire_rate

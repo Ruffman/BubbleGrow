@@ -1,6 +1,8 @@
 import pygame as pg
 from tank import Tank, AiTank, Crosshair
 
+from game_internal import ShipType, Faction
+
 
 
 pg.init()
@@ -14,16 +16,16 @@ background = pg.Surface(screen.get_size()).convert()
 background.fill("blue")
 
 
-player_tank = Tank('player', 'tank')
+player_tank = Tank(Faction.PLAYER, ShipType.TANK)
 player_tank.rect.center = (640, 360)
 crosshair = Crosshair()
 player_projectiles = pg.sprite.Group()
 
 player_sprites = pg.sprite.Group([player_tank, crosshair])
 
-ai_tank = AiTank('enemy', 'scout')
+ai_tank = AiTank(Faction.ENEMY, ShipType.SCOUT)
 ai_tank.rect.center = (100, 100)
-ai_tank_two = AiTank('enemy', 'freighter')
+ai_tank_two = AiTank(Faction.ENEMY, ShipType.TANK)
 ai_tank_two.rect.center = (700, 700)
 
 enemy_sprites = pg.sprite.Group([ai_tank, ai_tank_two])
@@ -57,7 +59,7 @@ while game_is_on:
                 projectile = player_tank.fire(pg.Vector2(crosshair.rect.center))
                 player_projectiles.add(projectile)
             if button == 3:
-                new_enemy = AiTank('enemy', 'tank')
+                new_enemy = AiTank(Faction.ENEMY, ShipType.TANK)
                 new_enemy.rect.center = pg.mouse.get_pos()
                 enemy_sprites.add(new_enemy)
 
