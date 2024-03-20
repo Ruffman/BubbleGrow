@@ -6,14 +6,13 @@ from game_internal import ShipType, Faction
 
 
 pg.init()
-screen = pg.display.set_mode((1000, 800), pg.SCALED)
+screen = pg.display.set_mode((1280, 1024), pg.SCALED)
 pg.display.set_caption("BubbleTanker")
 pg.mouse.set_visible(False)
 clock = pg.time.Clock()
 dt = 0
 
-background = pg.Surface(screen.get_size()).convert()
-background.fill("blue")
+background = pg.image.load("art/background/cool_red_space.jpg").convert()
 
 
 player_tank = Tank(Faction.PLAYER, ShipType.TANK)
