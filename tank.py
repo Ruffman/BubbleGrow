@@ -23,6 +23,7 @@ class Tank(pg.sprite.Sprite):
         self.image = self.orig_image
         self.rect = self.image.get_rect()
         self.radius = self.size // 2
+        self.position: pg.Vector2 = self.rect.center
 
         self.mount_points: [pg.Vector2] = [pg.Vector2(-self.size // 3, -self.size // 3),
                                            pg.Vector2(self.size // 3, -self.size // 3)]
@@ -41,7 +42,7 @@ class Tank(pg.sprite.Sprite):
         self.draw_heading()
 
     def move(self, direction: pg.Vector2, dt):
-        self.rect.center += direction * dt * self.speed
+        self.position += direction * dt * self.speed
 
     def fire(self, target: pg.Vector2) -> [Projectile]:
         new_projectiles = []
@@ -54,7 +55,7 @@ class Tank(pg.sprite.Sprite):
         return new_projectiles
 
     def get_position(self) -> pg.Vector2:
-        return pg.Vector2(self.rect.center)
+        return self.position
 
     def rotate_towards_mouse(self):
         direction: pg.Vector2 = pg.Vector2(pg.mouse.get_pos()) - pg.Vector2(self.rect.center)
