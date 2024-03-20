@@ -18,7 +18,8 @@ class Tank(pg.sprite.Sprite):
         self.size = SHIP_TYPE_STATS[self.ship_type][0]
         self.speed = SHIP_TYPE_STATS[self.ship_type][1]
 
-        self.orig_image = pg.transform.scale(pg.image.load(TYPE[faction]['image']).convert(), (self.size, self.size))
+        self.orig_image = pg.transform.scale(pg.image.load(TYPE[faction]['image']).convert_alpha(),
+                                             (self.size, self.size))
         self.image = self.orig_image
         self.rect = self.image.get_rect()
         self.radius = self.size // 2

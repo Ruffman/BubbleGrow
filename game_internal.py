@@ -12,7 +12,7 @@ class Faction(Enum):
 TYPE = {
     Faction.PLAYER: {
         'id': 1,
-        'image': "art/tanks/bubble.png",
+        'image': "art/tanks/geo_orb.png",
         'projectile': {
             'image': "art/tanks/bubble.png",
             'damage': 100,
