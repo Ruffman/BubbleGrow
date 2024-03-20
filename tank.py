@@ -85,7 +85,9 @@ class Crosshair(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.image = pg.image.load("art/tanks/crosshair.png")
+        self.size = 50
+        self.image = pg.image.load("art/crosshair.png").convert_alpha()
+        self.image = pg.transform.scale(self.image, (self.size, self.size))
 
         self.rect = self.image.get_rect()
 
