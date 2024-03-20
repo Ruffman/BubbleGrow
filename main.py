@@ -106,7 +106,9 @@ while game_is_on:
             print("enemy projectile hit player")  # TODO player loses health
 
     # this should come after update, but for debug purposes it's before for now
-    screen.blit(background, (0, 0))
+    camera_offset_x = -player_tank.position.x
+    camera_offset_y = -player_tank.position.y
+    screen.blit(background, (camera_offset_x, camera_offset_y))
 
     update_all_sprites(dt)
 
