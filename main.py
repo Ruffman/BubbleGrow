@@ -5,8 +5,11 @@ from game_internal import ShipType, Faction
 
 
 
+DISPLAY_WIDTH = 1280
+DISPLAY_HEIGHT = 1024
+
 pg.init()
-screen = pg.display.set_mode((1280, 1024), pg.SCALED)
+screen = pg.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT), pg.SCALED)
 pg.display.set_caption("BubbleTanker")
 pg.mouse.set_visible(False)
 clock = pg.time.Clock()
@@ -16,7 +19,7 @@ background = pg.image.load("art/background/cool_red_space.jpg").convert()
 
 
 player_tank = Tank(Faction.PLAYER, ShipType.TANK)
-player_tank.rect.center = (640, 360)
+player_tank.rect.center = (DISPLAY_WIDTH // 2, DISPLAY_HEIGHT // 2)
 crosshair = Crosshair()
 player_projectiles = pg.sprite.Group()
 
